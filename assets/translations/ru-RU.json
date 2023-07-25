@@ -1,0 +1,8 @@
+{
+    "global": {
+        "localization": "ru",
+        "pressing_ball": "Нажмите на шар\n или потрясите телефон",
+        "error": "Ошибка",
+        "download": "Загрузка"
+    }
+}
