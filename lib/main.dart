@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:surf_practice_magic_ball/screen/magic_ball/magic_ball_screen.dart';
+import 'package:surf_practice_magic_ball/screen/routes.dart';
 import 'package:surf_practice_magic_ball/screen/theme/theme_manager.dart';
 
 void main() async {
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       theme: ThemeManager().themeDataAndroid,
       debugShowCheckedModeBanner: false,
+      routes: Routes.routesMap,
       home: const MagicBallScreen(),
     );
   }

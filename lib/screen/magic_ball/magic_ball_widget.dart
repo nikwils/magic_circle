@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shake/shake.dart';
 import 'package:surf_practice_magic_ball/data/providers/providers.dart';
 import 'package:surf_practice_magic_ball/screen/magic_ball/magic_ball_animation.dart';
+import 'package:surf_practice_magic_ball/screen/settings/settings_screen.dart';
 
 class MagicBallWidget extends ConsumerStatefulWidget {
   const MagicBallWidget({super.key});
@@ -14,6 +15,9 @@ class MagicBallWidget extends ConsumerStatefulWidget {
 }
 
 class _MagicBallWidgetState extends ConsumerState<MagicBallWidget> {
+  double _newValue = .1;
+  Color? _newColor = Colors.white;
+
   @override
   void initState() {
     super.initState();
@@ -53,37 +57,21 @@ class _MagicBallWidgetState extends ConsumerState<MagicBallWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(),
-                Center(
-                  child: TextButton(
-                    onPressed: () {
-                      ref.read(magicBallProvider.notifier).fetchAnswer();
-                    },
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset('assets/imgs/magic_ball.png'),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              data.reading,
-                              maxLines: 2,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 32,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                MagicBallAnimations(_newColor, data.reading),
+                Slider.adaptive(
+                  value: _newValue,
+                  onChanged: (double value) {
+                    setState(() {
+                      _newValue = value;
+                      _newColor = Color.lerp(Colors.white,
+                          const Color.fromARGB(255, 199, 105, 220), value);
+                    });
+                  },
                 ),
-                Image.asset('assets/imgs/ellipse.png'),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(SettingsScreen.routeName);
+                  },
                   child: Text(
                     'global.pressing_ball'.tr(),
                     style: const TextStyle(
@@ -186,21 +174,13 @@ class _MagicBallWidgetState extends ConsumerState<MagicBallWidget> {
             children: [
               const SizedBox(),
               Center(
-                child: TextButton(
-                  onPressed: () {
-                    ref.read(magicBallProvider.notifier).fetchAnswer();
-                  },
-                  child: const Stack(
-                    alignment: Alignment.center,
-                    children: [MagicBallAnimations()],
-                  ),
-                ),
+                child: Image.asset('assets/imgs/magic_ball.png'),
               ),
               Image.asset('assets/imgs/ellipse.png'),
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  'global.download'.tr(),
+                  'global.pressing_ball'.tr(),
                   style: const TextStyle(
                     color: Color.fromARGB(255, 144, 144, 144),
                     fontSize: 16,
