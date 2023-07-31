@@ -9,4 +9,6 @@ class ThemeManager {
     fontFamily: "GillSansC",
     useMaterial3: true,
   );
+
+  Color colorMagicBall = Colors.white;
 }

@@ -15,9 +15,6 @@ class MagicBallWidget extends ConsumerStatefulWidget {
 }
 
 class _MagicBallWidgetState extends ConsumerState<MagicBallWidget> {
-  double _newValue = .1;
-  Color? _newColor = Colors.white;
-
   @override
   void initState() {
     super.initState();
@@ -51,38 +48,26 @@ class _MagicBallWidgetState extends ConsumerState<MagicBallWidget> {
               end: Alignment.bottomCenter,
             ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(56.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(),
-                MagicBallAnimations(_newColor, data.reading),
-                Slider.adaptive(
-                  value: _newValue,
-                  onChanged: (double value) {
-                    setState(() {
-                      _newValue = value;
-                      _newColor = Color.lerp(Colors.white,
-                          const Color.fromARGB(255, 199, 105, 220), value);
-                    });
-                  },
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(SettingsScreen.routeName);
-                  },
-                  child: Text(
-                    'global.pressing_ball'.tr(),
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 144, 144, 144),
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              MagicBallAnimations(data.reading),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(SettingsScreen.routeName)
+                      .then((_) => setState(() {}));
+                },
+                child: Text(
+                  'global.pressing_ball'.tr(),
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 144, 144, 144),
+                    fontSize: 16,
                   ),
-                )
-              ],
-            ),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
           ),
         );
       },

@@ -18,6 +18,8 @@ dependencies:
   http: ^0.13.6
   easy_localization: ^3.0.1
   shake: ^2.2.0
+  flutter_colorpicker: ^1.0.3
+  dropdown_button2: ^2.3.7
 
 dev_dependencies:
   flutter_test:
